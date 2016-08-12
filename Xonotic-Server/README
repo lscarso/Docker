@@ -1,0 +1,8 @@
+Compile image:
+sudo docker build -t local/xonotic-server:0.8.1 .
+
+Create container:
+sudo docker run -d -it --name MyXonotic -p 26000:26000/udp local/xonotic-server:0.8.1
+
+To connect as root:
+sudo docker exec -u 0 -it MyXonotic bash
