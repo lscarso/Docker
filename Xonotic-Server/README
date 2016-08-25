@@ -1,8 +1,16 @@
 Compile image:
 sudo docker build -t local/xonotic-server:0.8.1 .
 
+Create a separated volume for Xonotic data (Optional):
+sudo docker volume create --name xonotic-data
+sudo docker volume ls
+
 Create container:
 sudo docker run -d -it --name MyXonotic -p 26000:26000/udp local/xonotic-server:0.8.1
 
-To connect as root:
+or, if you chose to use a separated volume..
+Create container with separated volume:
+sudo docker run -d -it --name MyXonotic -p 26000:26000/udp -v xonotic-data:/home/xonoticadmin local/xonotic-server:0.8.1
+
+To connect as root (optional):
 sudo docker exec -u 0 -it MyXonotic bash
