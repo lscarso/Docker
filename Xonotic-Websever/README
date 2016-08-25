@@ -4,7 +4,7 @@
 sudo docker build -t local/lighttpd .
 
 # Create container:
-sudo docker run -d -it --name xonotic-web -p 80:80/tcp -v xonotic-data:/var/www local/lighttpd
+sudo docker run -d -it --name MyXonotic-Web -p 80:80/tcp -v xonotic-data:/var/www local/lighttpd
 
 # Connect with root to check/configure lighttpd
-sudo docker exec -u 0 -it xonotic-web bash
+sudo docker exec -u 0 -it MyXonotic-Web bash
