@@ -1,0 +1,13 @@
+#Build image homenas
+podman build -t homenas .
+
+#Tell SELinux it is ok to allow systemd to manipulate its Cgroups configuration.
+setsebool -P container_manage_cgroup true
+
+#Run container HOME-Nas
+sudo podman run -m 512m -u 0 -d -p 445:445 --name HOME-Nas -v /var/home/HOME-Nas/smb.conf:/etc/samba/smb.conf:Z -v /var/home/HOME-Nas/volume01:/home/volume01 homenas
+
+#Set systemd to manage container HOME-Nas
+sudo podman generate systemd --new --files --name HOME-Nas
+sudo mv -Z container-HOME-Nas.service  /etc/systemd/system
+sudo systemctl enable container-HOME-Nas.service
